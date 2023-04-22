@@ -5,9 +5,6 @@ import { AppError } from "../../error";
 export const listUserProfileServices = async (
   decoded: any
 ): Promise<Array<TuserResponse>> => {
-  console.log(decoded);
-
-  console.log(decoded.active);
   if (decoded.active !== true) {
     throw new AppError("", 400);
   }

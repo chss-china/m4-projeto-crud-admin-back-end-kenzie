@@ -13,9 +13,6 @@ export const updateUserService = async (
   userData: updateRequestUser,
   id: number
 ): Promise<TuserResponse> => {
-  //const id: number = parseInt(req.params.id);
-  //const userData: Partial<TuserRequest> = req.body;
-
   const queryString: string = format(
     `
     UPDATE users

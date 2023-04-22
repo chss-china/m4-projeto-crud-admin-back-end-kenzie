@@ -9,10 +9,6 @@ import * as bcrypt from "bcryptjs";
 export const createUserService = async (
   userData: TuserRequest
 ): Promise<TuserResponse> => {
-  /* const userDataActiveFalse = (userData.active = false);
-  if (userDataActiveFalse == false) {
-    userData.active = true;
-  }*/
   userData.password = await bcrypt.hash(userData.password, 10);
   const queryString: string = format(
     `

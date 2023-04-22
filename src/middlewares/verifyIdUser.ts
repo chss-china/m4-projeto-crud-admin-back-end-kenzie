@@ -26,6 +26,6 @@ export const verfifyIdUser = async (
       message: "User not found",
     });
   }
-  //res.locals.developer = queryResult.rows[0];
+
   return next();
 };

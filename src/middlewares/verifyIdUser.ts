@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { QueryConfig, QueryResult } from "pg";
 import { Tuser } from "../interfaces/user.interface";
 import { client } from "../database";
+import { AppError } from "../error";
 export const verfifyIdUser = async (
   req: Request,
   res: Response,
@@ -22,9 +23,7 @@ export const verfifyIdUser = async (
   const queryResult: QueryResult<Tuser> = await client.query(queryConfig);
 
   if (queryResult.rowCount === 0) {
-    return res.status(404).json({
-      message: "User not found",
-    });
+    throw new AppError("User not found", 404);
   }
 
   return next();

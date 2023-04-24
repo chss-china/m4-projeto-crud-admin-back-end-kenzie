@@ -18,6 +18,7 @@ export const verifyTokenValidMidd = async (
     if (err) {
       throw new AppError(err.message, 401);
     }
+
     res.locals = {
       decoded,
       ...res.locals,

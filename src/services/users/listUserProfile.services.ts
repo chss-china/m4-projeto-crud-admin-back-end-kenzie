@@ -2,12 +2,10 @@ import { TuserResponse } from "../../interfaces/user.interface";
 import { QueryResult } from "pg";
 import { client } from "../../database";
 import { AppError } from "../../error";
+
 export const listUserProfileServices = async (
   decoded: any
-): Promise<Array<TuserResponse>> => {
-  if (decoded.active !== true) {
-    throw new AppError("", 400);
-  }
+): Promise<TuserResponse | any> => {
   const queryString: string = `
         SELECT
            "id",
@@ -16,10 +14,13 @@ export const listUserProfileServices = async (
            "admin",
            "active"
          FROM
-            users;
+            users
+        WHERE id = $1;
         `;
   const queryResult: QueryResult<TuserResponse> = await client.query(
-    queryString
+    queryString,
+    [decoded.sub]
   );
-  return queryResult.rows;
+
+  return queryResult.rows[0];
 };

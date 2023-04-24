@@ -1,8 +1,10 @@
 import { Router, Request, Response } from "express";
 import {
   createUserControllers,
+  deleteSoftControllers,
   listUserControllers,
   listUserProfileControllers,
+  reactivateUserControllers,
   updateUserControllers,
 } from "../controllers/user.controllers";
 import { verifyEmailExistsMidd } from "../middlewares/user.midd";
@@ -16,6 +18,8 @@ import { verifyTokenValidMidd } from "../middlewares/tokenIsValidmidd";
 import { verifyNotAdmin } from "../middlewares/listUserNotAdmin.midd";
 import { updateVerifyNotAdmin } from "../middlewares/updateUserNotAdmin";
 import { verfifyIdUser } from "../middlewares/verifyIdUser";
+import { reactivateUserService } from "../services/users/reactive.user.service";
+import { verifyActiveExistsMidd } from "../middlewares/verify.active.midd";
 const userRoutes: Router = Router();
 userRoutes.post(
   "",
@@ -37,7 +41,15 @@ userRoutes.delete(
   "/:id",
   verfifyIdUser,
   verifyTokenValidMidd,
-  updateVerifyNotAdmin
+  updateVerifyNotAdmin,
+  deleteSoftControllers
 );
-userRoutes.put("/:id/recover", verfifyIdUser, verifyNotAdmin);
+userRoutes.put(
+  "/:id/recover",
+  verfifyIdUser,
+  verifyTokenValidMidd,
+  verifyNotAdmin,
+  verifyActiveExistsMidd,
+  reactivateUserControllers
+);
 export default userRoutes;

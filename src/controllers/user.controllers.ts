@@ -7,11 +7,10 @@ import {
 } from "../interfaces/user.interface";
 import { listUserService } from "../services/users/listUser.service";
 import { updateUserService } from "../services/users/updateUser.services";
-import {
-  createUserRequestSchema,
-  updateUserSchema,
-} from "../schemas/user.schemas";
+
 import { listUserProfileServices } from "../services/users/listUserProfile.services";
+import { deleteSoftService } from "../services/users/softdelete.service";
+import { reactivateUserService } from "../services/users/reactive.user.service";
 export const createUserControllers = async (
   req: Request,
   res: Response
@@ -43,7 +42,22 @@ export const updateUserControllers = async (
 ): Promise<Response> => {
   const userData: updateRequestUser = req.body;
   const id: number = parseInt(req.params.id);
-  const decodedId = res.locals.decoded;
   const updateUser: TuserResponse = await updateUserService(userData, id);
   return res.status(200).json(updateUser);
+};
+export const deleteSoftControllers = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const id: number = parseInt(req.params.id);
+  const deleteSoftActive = await deleteSoftService(id);
+  return res.status(204).json(deleteSoftActive);
+};
+export const reactivateUserControllers = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const id: number = parseInt(req.params.id);
+  const reactivateUser = await reactivateUserService(id);
+  return res.status(200).json(reactivateUser);
 };

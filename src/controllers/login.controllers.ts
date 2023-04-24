@@ -4,11 +4,7 @@ import {
   TuserRequest,
   userLoginRequest,
 } from "../interfaces/user.interface";
-import {
-  createSchemaLoginRequest,
-  createUserSchema,
-} from "../schemas/user.schemas";
-import { createUserService } from "../services/users/createUser.service";
+
 import { loginCreateServices } from "../services/login/login.user.service";
 import { Request, Response } from "express";
 

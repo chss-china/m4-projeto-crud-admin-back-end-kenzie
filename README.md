@@ -1,5 +1,5 @@
 # CRUD de Usuário + Permissão de Administrador
-
+## Resultado foi excelente obtendo nota máxima e passando em todos testes
 # Introdução
 
 A empresa que você trabalha precisa criar um MVP (Minimum Viable Product) de uma API que faz o controle de usuários através de um CRUD. Essa API também precisa ter um controle de acessos, onde alguns recursos podem ser acessados apenas por usuários que fizeram login na aplicação, e outros recursos apenas usuários que fizeram login e tem permissões de administrador podem acessar.
